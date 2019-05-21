@@ -5,6 +5,8 @@ const Path = require("path");
 const hostname = 'localhost';
 const port = 3000;
 
+const express = require('express');
+
 const server = http.createServer((req, res) => {
     console.log("Requesting for " + req.url + " by method " + req.method)
     var fileUrl;
