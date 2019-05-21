@@ -1,22 +1,24 @@
 const http = require("http");
-const fs = require("fs");
 const Path = require("path");
 
+const morgan = require('morgan');
 const hostname = 'localhost';
 const port = 3000;
 
 const express = require('express');
 const app = express();
 
+app.use(morgan('dev'));
 
+app.use(express.static(__dirname + "/public"));
 
 app.use((req, res, next) => {
-    console.log("Requesting for " + req.url + " by method " + req.method)
     var fileUrl;
     if (req.url == '/')
         fileUrl = '/index.html';
     else
         fileUrl = req.url;
+
     var filePath = Path.resolve('./public' + fileUrl);
     var fileExt = Path.extname(filePath);
     if (fileExt == '.html') {
@@ -28,7 +30,6 @@ app.use((req, res, next) => {
             } else {
                 res.statusCode = 200;
                 res.setHeader('Content-Type', 'text/html');
-                fs.createReadStream(filePath).pipe(res);
 
             }
         })
@@ -39,6 +40,7 @@ app.use((req, res, next) => {
         res.end("<html><body><h1>Error: 404<br>" + fileUrl + " Extension Error</h1></body></html>");
 
     }
+
 
 });
 
