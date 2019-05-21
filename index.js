@@ -1,6 +1,6 @@
 const http = require("http");
 const fs = require("fs");
-const Path = require("Path");
+const Path = require("path");
 
 const hostname = 'localhost';
 const port = 3000;
@@ -8,8 +8,10 @@ const port = 3000;
 const server = http.createServer((req, res) => {
     console.log("Requesting for " + req.url + " by method " + req.method)
     var fileUrl;
-    if (req.url == '/') fileUrl = index.html;
-    else fileUrl = req.url;
+    if (req.url == '/')
+        fileUrl = '/index.html';
+    else
+        fileUrl = req.url;
     var filePath = Path.resolve('./public' + fileUrl);
     var fileExt = Path.extname(filePath);
     if (fileExt == '.html') {
