@@ -6,8 +6,11 @@ const hostname = 'localhost';
 const port = 3000;
 
 const express = require('express');
+const app = express();
 
-const server = http.createServer((req, res) => {
+
+
+app.use((req, res, next) => {
     console.log("Requesting for " + req.url + " by method " + req.method)
     var fileUrl;
     if (req.url == '/')
@@ -37,7 +40,9 @@ const server = http.createServer((req, res) => {
 
     }
 
-})
+});
+
+const server = http.createServer(app);
 
 server.listen(port, hostname, () => {
     console.log(`Server Running at http://${hostname}:${port}`);
