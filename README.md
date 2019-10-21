@@ -13,6 +13,7 @@ to install all the dependancies to your local device.
 ```
 $ npm start 
 ```
-to start the server
+to start the server.
+
 
 #### The local server will be at http://localhost:3000
